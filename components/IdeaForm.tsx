@@ -8,7 +8,7 @@ export default function IdeaGenerator() {
   const [topic, setTopic] = useState("");
   const [keyword, setKeyword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     alert(
       `Niche: ${niche}\nType: ${type}\nTopic: ${topic}\nKeyword: ${keyword}`
