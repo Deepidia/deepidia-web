@@ -17,7 +17,7 @@ export default function IdeaGenerator() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white px-4 py-12 mt-14">
-      <h1 className="text-4xl font-bold mb-2 text-center">
+      <h1 className="text-4xl font-bold mb-2 text-center text-black">
         Content Idea Generator
       </h1>
       <p className="text-gray-600 mb-8 text-center">
@@ -29,16 +29,16 @@ export default function IdeaGenerator() {
         onSubmit={handleSubmit}
         className="bg-white w-full max-w-2xl p-6 rounded-xl border shadow"
       >
-        <label className="block mb-2 font-semibold">NICHE</label>
+        <label className="block mb-2 font-semibold text-black">NICHE</label>
         <input
           type="text"
           placeholder="Search here"
           value={niche}
           onChange={(e) => setNiche(e.target.value)}
-          className="w-full border px-4 py-2 rounded mb-4"
+          className="w-full border px-4 py-2 rounded mb-4 text-[#AFAFAF]"
         />
 
-        <label className="block mb-2 font-semibold">Type of Niche</label>
+        <label className="block mb-2 font-semibold text-black">Type of Niche</label>
         <div className="flex flex-wrap gap-2 mb-4">
           {[
             "All Topics",
@@ -61,11 +61,11 @@ export default function IdeaGenerator() {
           ))}
         </div>
 
-        <label className="block mb-2 font-semibold">Select Topics</label>
+        <label className="block mb-2 font-semibold text-black">Select Topics</label>
         <select
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
-          className="w-full border px-4 py-2 rounded mb-4"
+          className="w-full border px-4 py-2 rounded mb-4 text-[#AFAFAF]"
         >
           <option value="">Choose a field topics</option>
           <option value="marketing">Marketing</option>
@@ -74,7 +74,7 @@ export default function IdeaGenerator() {
           <option value="education">Education</option>
         </select>
 
-        <label className="block mb-2 font-semibold">
+        <label className="block mb-2 font-semibold text-black">
           Additional Keywords (Optional)
         </label>
         <input
@@ -82,7 +82,7 @@ export default function IdeaGenerator() {
           placeholder="Enter specific keyword"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
-          className="w-full border px-4 py-2 rounded mb-6"
+          className="w-full border px-4 py-2 rounded mb-6 text-[#AFAFAF]"
         />
 
           <div className='flex justify-center'>

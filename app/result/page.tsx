@@ -8,7 +8,7 @@ export default function GeneratorPage() {
       <Header />
 
       <section className="flex flex-col items-center px-4 py-12 mt-14">
-        <h1 className="text-4xl font-bold text-center mb-8">Results</h1>
+        <h1 className="text-4xl font-bold text-center mb-8 text-black">Results</h1>
 
         <div className="w-full max-w-3xl border rounded-xl p-6 bg-white shadow">
           <IdeaResult />

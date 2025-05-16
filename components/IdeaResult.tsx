@@ -1,7 +1,7 @@
 export default function IdeaResult() {
   return (
     <div className="border rounded-xl p-6 mb-4 shadow-sm bg-white w-full">
-      <h3 className="font-semibold text-sm md:text-base">
+      <h3 className="font-semibold text-sm md:text-base text-black">
         Title One of The Colonialism
       </h3>
       <p className="text-sm text-gray-700 mt-2">
@@ -15,7 +15,7 @@ export default function IdeaResult() {
         Technology, AI
       </div>
       <div className="mt-4">
-        <button className="bg-gray-100 px-4 py-1 text-sm rounded-full hover:bg-gray-200 border border-gray-300">
+        <button className="bg-gray-100 px-4 py-1 text-gray-500 text-sm rounded-full hover:bg-gray-200 border border-gray-300">
           Trending Now
         </button>
       </div>

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Features() {
   return (
-    <div className="px-4 md:px-12 lg:px-24 py-10">
+    <div className="bg-white px-4 md:px-12 lg:px-24 py-10">
       {/* Section pertama */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Kolom kiri */}
@@ -123,7 +123,7 @@ export default function Features() {
         </div>
       </div>
 
-      <p className="text-right text-xl mt-4">
+      <p className="text-right text-xl mt-4 text-black">
         For every page in your playbook, “There’s a workflow for that.”
       </p>
     </div>

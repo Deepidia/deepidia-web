@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <main>
-      <section className="text-center py-16 px-4">
+    <main className="bg-white">
+      <section className=" text-center py-16 px-4">
         {/* Logo */}
         <div className="flex justify-center mb-6 mt-16">
           <Image
@@ -50,7 +50,7 @@ export default function Hero() {
           <h2 className="text-[#000000] text-2xl md:text-3xl font-bold mb-4">
             Find Your Cool Inspiration with Playbook
           </h2>
-          <p className="text-[#000000] max-w-xl mx-auto mb-12">
+          <p className="text-[#000000] max-w-xl mx-auto mb-12 text-xl">
             You can find your cool ideas with just one click and according to
             the Niche and topic fields you choose.
           </p>
@@ -58,36 +58,36 @@ export default function Hero() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Card 1 */}
             <div className="border rounded-lg p-6 m-4 text-left bg-white shadow-sm hover:shadow-md transition">
-              <h3 className="text-xl font-semibold mb-2">Generate Idea</h3>
+              <h3 className="text-xl font-semibold mb-2 text-black">Generate Idea</h3>
               <p className="text-gray-600 mb-4">
                 Instantly generate ideas to overcome creative blocks or quickly
                 kickstart new projects.
               </p>
-              <button className="border border-black px-4 py-1 rounded hover:bg-black hover:text-white transition cursor-pointer">
+              <button className="border border-black px-4 py-1 rounded text-black hover:bg-black hover:text-white transition cursor-pointer">
                 Get Demo
               </button>
             </div>
 
             {/* Card 2 */}
             <div className="border rounded-lg p-6 m-4 text-left bg-white shadow-sm hover:shadow-md transition">
-              <h3 className="text-xl font-semibold mb-2">Content Creation</h3>
+              <h3 className="text-xl font-semibold mb-2 text-black">Content Creation</h3>
               <p className="text-gray-600 mb-4">
                 Directly connects generated ideas to spreadsheets for
                 streamlined content management.
               </p>
-              <button className="border border-black px-4 py-1 rounded hover:bg-black hover:text-white transition cursor-pointer">
+              <button className="border border-black px-4 py-1 rounded text-black hover:bg-black hover:text-white transition cursor-pointer">
                 Get Demo
               </button>
             </div>
 
             {/* Card 3 */}
             <div className="border rounded-lg p-6 m-4 text-left bg-white shadow-sm hover:shadow-md transition">
-              <h3 className="text-xl font-semibold mb-2">Blog Post</h3>
+              <h3 className="text-xl font-semibold mb-2 text-black">Blog Post</h3>
               <p className="text-gray-600 mb-4">
                 Seamlessly connect and publish your ideas directly to Medium or
                 other markdown-supported blog platforms.
               </p>
-              <button className="border border-black px-4 py-1 rounded hover:bg-black hover:text-white transition cursor-pointer">
+              <button className="border border-black px-4 py-1 rounded text-black hover:bg-black hover:text-white transition cursor-pointer">
                 Get Demo
               </button>
             </div>

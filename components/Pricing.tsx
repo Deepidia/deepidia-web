@@ -1,6 +1,6 @@
 export default function Pricing() {
   return (
-    <section className="bg-[url('/bg-dot.png')] bg-repeat p-0">
+    <section className="bg-white bg-[url('/bg-dot.png')] bg-repeat p-0">
       <div className="min-h-screen text-black px-6 py-12 md:px-20">
         <h2 className="text-3xl font-bold text-center mb-10">
           One Solution for Every Research Need
