@@ -23,6 +23,7 @@ export default function Hero() {
           Find your best Idea from the best
         </h1>
 
+
         {/* Description */}
         <p className="text-[#000000] max-w-2xl mx-auto text-sm md:text-base mb-8 leading-relaxed">
           DeepIdea is an innovative AI-driven platform designed to help users
