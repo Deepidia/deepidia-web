@@ -4,13 +4,13 @@
     "private": true,
     "scripts": {
         "dev": "next dev --turbopack",
-        "build": "prisma generate && next build",
+        "build": "next build",
         "start": "next start",
         "postinstall": "prisma generate",
         "lint": "next lint",
-        "prisma:generate": "npx prisma generate",
-        "prisma:studio": "npx prisma studio",
-        "prisma:migrate": "npx prisma migrate dev"
+        "prisma:generate": "prisma generate",
+        "prisma:studio": "prisma studio",
+        "prisma:migrate": "prisma migrate dev"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.7.2",
