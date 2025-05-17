@@ -1,5 +1,4 @@
 {
   "buildCommand": "npm install && npx prisma generate && npm run build",
-  "outputDirectory": "out",
-  "ignoreCommand": "echo 'skipping' && exit 0"
+  "outputDirectory": "out"
 }
