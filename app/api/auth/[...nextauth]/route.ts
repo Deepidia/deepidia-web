@@ -1,46 +1,146 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+import prisma from "@/lib/db";
+import bcrypt from "bcryptjs";
+import { JWT } from "next-auth/jwt";
+import { Session } from "next-auth";
+
+// Extend the built-in session types
+declare module "next-auth" {
+    interface Session {
+        user: {
+            id: string;
+            name?: string | null;
+            email?: string | null;
+            image?: string | null;
+        };
+    }
+}
+
+// Extend the built-in JWT types
+declare module "next-auth/jwt" {
+    interface JWT {
+        id: string;
+        picture?: string;
+    }
+}
 
 const authOptions: NextAuthOptions = {
-  session: {
-    strategy: "jwt",
-  },
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-  ],
-  callbacks: {
-    async signIn({ profile }) {
-      return !!profile?.email;
+    session: {
+        strategy: "jwt",
     },
+    providers: [
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+        }),
+        CredentialsProvider({
+            name: "credentials",
+            credentials: {
+                email: { label: "Email", type: "email" },
+                password: { label: "Password", type: "password" },
+            },
+            async authorize(credentials) {
+                if (!credentials?.email || !credentials?.password) {
+                    throw new Error("Missing credentials");
+                }
 
-    async jwt({ token, profile, account }) {
-      // Tambahkan informasi user saat pertama kali login
-      if (account && profile) {
-        token.name = profile.name;
-        token.email = profile.email;
-      }
-      return token;
-    },
-    
-    async session({ session, token }) {
-      if (token) {
-        if (!session.user) {
-          session.user = {}; // inisialisasi objek kosong kalau belum ada
-        }
+                const user = await prisma.user.findUnique({
+                    where: { email: credentials.email },
+                });
 
-        session.user.name = token.name as string;
-        session.user.email = token.email as string;
-      }
+                if (!user || !user.password) {
+                    throw new Error("Invalid credentials");
+                }
 
-      return session;
+                const isValid = await bcrypt.compare(
+                    credentials.password,
+                    user.password
+                );
+
+                if (!isValid) {
+                    throw new Error("Invalid credentials");
+                }
+
+                return {
+                    id: user.id,
+                    email: user.email,
+                    name:
+                        user.name ||
+                        `${user.firstName} ${user.lastName}`.trim(),
+                    image: user.avatar,
+                };
+            },
+        }),
+    ],
+    callbacks: {
+        async signIn({ profile, account, user }) {
+            if (account?.provider === "google" && profile) {
+                try {
+                    // Check if user exists
+                    const existingUser = await prisma.user.findUnique({
+                        where: { email: profile.email! },
+                    });
+
+                    if (!existingUser) {
+                        // Create new user if doesn't exist
+                        await prisma.user.create({
+                            data: {
+                                email: profile.email!,
+                                name: profile.name,
+                                avatar: profile.image,
+                                authProvider: "google",
+                            },
+                        });
+                    } else if (existingUser.authProvider === "credentials") {
+                        // Update existing user if they previously used credentials
+                        await prisma.user.update({
+                            where: { email: profile.email! },
+                            data: {
+                                name: profile.name,
+                                avatar: profile.image,
+                                authProvider: "google",
+                            },
+                        });
+                    }
+                    return true;
+                } catch (error) {
+                    console.error("Error during Google sign in:", error);
+                    return false;
+                }
+            }
+            return true;
+        },
+
+        async jwt({ token, profile, account, user }) {
+            if (account && profile) {
+                token.id = user.id;
+                token.name = profile.name || user.name || null;
+                token.email = profile.email || user.email;
+                token.picture = profile.image || user.image || undefined;
+            }
+            return token;
+        },
+
+        async session({ session, token }: { session: Session; token: JWT }) {
+            if (token && session.user) {
+                session.user.id = token.id;
+                session.user.name = token.name || null;
+                session.user.email = token.email as string;
+                session.user.image = token.picture as string;
+            }
+            return session;
+        },
+
+        async redirect({ baseUrl }) {
+            return `${baseUrl}/`;
+        },
     },
-    async redirect({ baseUrl }) {
-      return `${baseUrl}/`;
+    pages: {
+        signIn: "/login",
+        error: "/login",
     },
-  },
 };
 
 const handler = NextAuth(authOptions);

@@ -4,17 +4,21 @@ generator client {
 
 
 datasource db {
-  provider = "postgresql" // ← change from mysql
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  firstName  String
-  lastName   String
-  email      String   @unique
-  password   String
-  createdAt  DateTime @default(now())
+  id            String    @id @default(dbgenerated("concat('usr_', replace(cast(gen_random_uuid() as text), '-', ''))"))
+  firstName     String?
+  lastName      String?
+  email         String    @unique
+  password      String?   // Optional since Google users won't have a password
+  name          String?   // For Google users who don't have first/last name
+  avatar        String?   // For profile picture from Google
+  authProvider  String    @default("credentials") // "credentials" or "google"
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now()) @updatedAt
 
   @@map("users") // Optional: if you want a specific table name in the DB
 }
