@@ -13,7 +13,9 @@ Modal.setAppElement("body");
 export default function Header() {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false); // untuk mobile menu
-  const [userManual, setUserManual] = useState<{ firstName: string } | null>(null);
+  const [userManual, setUserManual] = useState<{ firstName: string } | null>(
+    null
+  );
   const [modalIsOpen, setModalIsOpen] = useState(false); // untuk modal logout
 
   useEffect(() => {
@@ -37,9 +39,7 @@ export default function Header() {
   // Ambil nama pertama user dari session NextAuth jika ada,
   // kalau tidak ada, ambil dari user manual (localStorage)
   const firstName =
-    session?.user?.name?.split(" ")[0] ??
-    userManual?.firstName ??
-    "";
+    session?.user?.name?.split(" ")[0] ?? userManual?.firstName ?? "";
 
   // Kondisi user dianggap login jika ada session atau userManual
   const isLoggedIn = Boolean(session || userManual);
@@ -48,11 +48,11 @@ export default function Header() {
     <header className="w-full px-10 py-3 flex items-center justify-between bg-white shadow-md fixed top-0 z-50">
       {/* Desktop Navigation */}
       <nav className="hidden md:flex space-x-8 text-[#1D1D1D] font-bold">
-        <Link href="#solutions" className="hover:text-[#00BFA6] transition">
-          Solutions
-        </Link>
         <Link href="#about" className="hover:text-[#00BFA6] transition">
           About
+        </Link>
+        <Link href="#solutions" className="hover:text-[#00BFA6] transition">
+          Solutions
         </Link>
         <Link href="#pricing" className="hover:text-[#00BFA6] transition">
           Pricing
@@ -128,19 +128,20 @@ export default function Header() {
       {isOpen && (
         <div className="absolute top-16 left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 py-4 md:hidden">
           <Link
-            href="#solutions"
-            className="hover:text-[#00BFA6] transition"
-            onClick={() => setIsOpen(false)}
-          >
-            Solutions
-          </Link>
-          <Link
             href="#about"
             className="hover:text-[#00BFA6] transition"
             onClick={() => setIsOpen(false)}
           >
             About
           </Link>
+          <Link
+            href="#solutions"
+            className="hover:text-[#00BFA6] transition"
+            onClick={() => setIsOpen(false)}
+          >
+            Solutions
+          </Link>
+
           <Link
             href="#pricing"
             className="hover:text-[#00BFA6] transition"

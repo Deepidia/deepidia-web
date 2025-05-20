@@ -5,9 +5,9 @@ import Link from "next/link";
 
 export default function Features() {
   return (
-    <div className="bg-white px-4 md:px-12 lg:px-24 py-10">
+    <div className="bg-white mx-4 sm:mx-6 md:mx-10 lg:mx-20 px-4 sm:px-6 md:px-12 lg:px-24 py-10 sm:py-14 md:py-20 lg:py-28">
       {/* Section pertama */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 sm:px-8 md:px-20 py-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-2 sm:px-4 md:px-10 lg:px-16 py-8 sm:py-10 md:py-12">
         {/* Kolom kiri */}
         <div className="flex flex-col justify-center text-gray-800">
           <h1 className="text-2xl sm:text-3xl font-bold mb-4">Key Features</h1>
@@ -92,7 +92,7 @@ export default function Features() {
       </div>
 
       {/* Section kedua */}
-      <div className="bg-black text-white rounded-xl px-4 sm:px-6 md:px-12 py-10 mt-16 text-center">
+      <div className="bg-black text-white rounded-xl px-4 sm:px-6 md:px-12 lg:px-20 py-10 mt-16 mb-4 text-center">
         <h2 className="text-2xl sm:text-3xl mb-6 font-bold leading-snug">
           Speed Up Your Research
           <br />
@@ -123,7 +123,7 @@ export default function Features() {
         </div>
       </div>
 
-      <p className="text-center sm:text-right text-base sm:text-xl mt-4 text-black px-4">
+      <p className="text-center sm:text-right text-base sm:text-xl mt-2 text-black px-2">
         For every page in your playbook, “There’s a workflow for that.”
       </p>
     </div>

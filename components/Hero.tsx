@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <main className="bg-white">
-      <section className="text-center py-12 px-4 md:py-20">
+      <section id="about" className="text-center py-12 px-4 md:py-44 mx-4 sm:mx-4 md:mx-10 lg:mx-20">
         {/* Logo */}
         <div className="flex justify-center mb-6 mt-10">
           <Image
@@ -19,7 +19,7 @@ export default function Hero() {
         </div>
 
         {/* Headline */}
-        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold italic text-black mb-4 leading-snug">
+        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold italic text-black mb-4  leading-snug">
           Find your best Idea from the best
         </h1>
 
@@ -45,7 +45,10 @@ export default function Hero() {
         </div>
       </section>
 
-      <section className="bg-[url('/bg-dot.png')] bg-repeat py-16">
+      <section
+        id="solutions"
+        className="bg-[url('/bg-dot.png')] bg-repeat py-40"
+      >
         <div className="max-w-6xl mx-auto text-center">
           <div className="mx-auto text-center">
             <h2 className="text-[#000000] text-2xl md:text-3xl font-bold mb-4">
