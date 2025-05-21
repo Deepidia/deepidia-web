@@ -1,15 +1,26 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import AOS from "aos";
+import "aos/dist/aos.css";  // Import style AOS
 
 export default function Features() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // durasi animasi dalam ms
+      easing: "ease-in-out",
+      once: true, // animasi hanya sekali saat scroll pertama
+    });
+  }, []);
+
   return (
     <div className="bg-white mx-4 sm:mx-6 md:mx-10 lg:mx-20 px-4 sm:px-6 md:px-12 lg:px-24 py-10 sm:py-14 md:py-20 lg:py-28">
       {/* Section pertama */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-2 sm:px-4 md:px-10 lg:px-16 py-8 sm:py-10 md:py-12">
         {/* Kolom kiri */}
-        <div className="flex flex-col justify-center text-gray-800">
+        <div className="flex flex-col justify-center text-gray-800" data-aos="fade-right">
           <h1 className="text-2xl sm:text-3xl font-bold mb-4">Key Features</h1>
           <p className="mb-8 max-w-xl">
             You can find your cool ideas with just one click and according to
@@ -17,7 +28,7 @@ export default function Features() {
           </p>
 
           <ul className="space-y-6 mb-12">
-            <li className="flex items-start gap-3">
+            <li className="flex items-start gap-3" data-aos="fade-up" data-aos-delay="100">
               <span className="mt-1">
                 <Image
                   src="/magnifying-glass.png"
@@ -31,7 +42,7 @@ export default function Features() {
                 innovative ideas tailored to specific keywords.
               </p>
             </li>
-            <li className="flex items-start gap-3">
+            <li className="flex items-start gap-3" data-aos="fade-up" data-aos-delay="200">
               <span className="mt-1">
                 <Image
                   src="/rocket.png"
@@ -46,7 +57,7 @@ export default function Features() {
                 trend alignment.
               </p>
             </li>
-            <li className="flex items-start gap-3">
+            <li className="flex items-start gap-3" data-aos="fade-up" data-aos-delay="300">
               <span className="mt-1">
                 <Image
                   src="/handshake.png"
@@ -61,7 +72,7 @@ export default function Features() {
                 exploration.
               </p>
             </li>
-            <li className="flex items-start gap-3">
+            <li className="flex items-start gap-3" data-aos="fade-up" data-aos-delay="400">
               <span className="mt-1">
                 <Image
                   src="/thumbs-up.png"
@@ -80,7 +91,7 @@ export default function Features() {
         </div>
 
         {/* Kolom kanan */}
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center" data-aos="fade-left" data-aos-delay="500">
           <Image
             src="/Image1.png"
             alt="Gambar features"
@@ -92,7 +103,10 @@ export default function Features() {
       </div>
 
       {/* Section kedua */}
-      <div className="bg-black text-white rounded-xl px-4 sm:px-6 md:px-12 lg:px-20 py-10 mt-16 mb-4 text-center">
+      <div
+        className="bg-black text-white rounded-xl px-4 sm:px-6 md:px-12 lg:px-20 py-10 mt-16 mb-4 text-center"
+        data-aos="zoom-in"
+      >
         <h2 className="text-2xl sm:text-3xl mb-6 font-bold leading-snug">
           Speed Up Your Research
           <br />
@@ -123,7 +137,7 @@ export default function Features() {
         </div>
       </div>
 
-      <p className="text-center sm:text-right text-base sm:text-xl mt-2 text-black px-2">
+      <p className="text-center sm:text-right text-base sm:text-xl mt-2 text-black px-2" data-aos="fade-up" data-aos-delay="600">
         For every page in your playbook, “There’s a workflow for that.”
       </p>
     </div>
