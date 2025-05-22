@@ -4,18 +4,18 @@ export default function IdeaResult() {
       <h3 className="font-semibold text-sm md:text-base text-black">
         Title One of The Colonialism
       </h3>
-      <p className="text-sm text-gray-700 mt-2">
+      <p className="text-sm text-gray-900 mt-2">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis in
         sapien a bibendum. Duis finibus elit in ante fermentum, vel volutpat
         risus tincidunt. Class aptent taciti sociosqu ad litora torquent per
         conubia nostra, per inceptos himenaeos.
       </p>
-      <div className="mt-4 text-sm text-gray-600">
+      <div className="mt-4 text-sm text-gray-900">
         <strong className="block text-xs mb-1">Topic Fields</strong>
         Technology, AI
       </div>
       <div className="mt-4">
-        <button className="bg-gray-100 px-4 py-1 text-gray-500 text-sm rounded-full hover:bg-gray-200 border border-gray-300">
+        <button className="bg-gray-100 px-4 py-1 text-black text-sm rounded-full hover:bg-gray-200 border border-gray-300">
           Trending Now
         </button>
       </div>

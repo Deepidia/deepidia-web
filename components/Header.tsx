@@ -47,22 +47,23 @@ export default function Header() {
   return (
     <header className="w-full px-10 py-3 flex items-center justify-between bg-white shadow-md fixed top-0 z-50">
       {/* Desktop Navigation */}
-      <nav className="hidden md:flex space-x-8 text-[#1D1D1D] font-bold">
-        <Link href="#about" className="hover:text-[#00BFA6] transition">
+            {/* Logo */}
+
+      <nav className="hidden md:flex items-center space-x-8 text-[#1D1D1D] font-bold">
+              <Link href="/">
+        <Image src="/Logo.png" alt="Logo DeepIdia" width={40} height={30} />
+      </Link>
+        <Link href="#about" className="hover:text-[#00BFA6] transition text-lg">
           About
         </Link>
-        <Link href="#solutions" className="hover:text-[#00BFA6] transition">
+        <Link href="#solutions" className="hover:text-[#00BFA6] transition text-lg">
           Solutions
         </Link>
-        <Link href="#pricing" className="hover:text-[#00BFA6] transition">
+        <Link href="#pricing" className="hover:text-[#00BFA6] transition text-lg">
           Pricing
         </Link>
       </nav>
 
-      {/* Logo */}
-      <Link href="/">
-        <Image src="/Logo.png" alt="Logo DeepIdia" width={40} height={30} />
-      </Link>
 
       {/* Actions */}
       <div className="hidden md:flex items-center space-x-4">
@@ -80,7 +81,7 @@ export default function Header() {
           <>
             <Link
               href="/login"
-              className="text-[#1D1D1D] hover:text-[#00BFA6] transition font-bold"
+              className="text-[#1D1D1D] hover:text-[#00BFA6] transition font-bold text-lg"
             >
               Sign In
             </Link>
@@ -129,14 +130,14 @@ export default function Header() {
         <div className="absolute top-16 left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 py-4 md:hidden">
           <Link
             href="#about"
-            className="hover:text-[#00BFA6] transition"
+            className="hover:text-[#00BFA6] transition text-lg"
             onClick={() => setIsOpen(false)}
           >
             About
           </Link>
           <Link
             href="#solutions"
-            className="hover:text-[#00BFA6] transition"
+            className="hover:text-[#00BFA6] transition text-lg"
             onClick={() => setIsOpen(false)}
           >
             Solutions
@@ -144,14 +145,14 @@ export default function Header() {
 
           <Link
             href="#pricing"
-            className="hover:text-[#00BFA6] transition"
+            className="hover:text-[#00BFA6] transition text-lg"
             onClick={() => setIsOpen(false)}
           >
             Pricing
           </Link>
           <Link
             href="/login"
-            className="hover:text-[#00BFA6] transition"
+            className="hover:text-[#00BFA6] transition text-lg"
             onClick={() => setIsOpen(false)}
           >
             Sign In

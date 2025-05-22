@@ -2,41 +2,47 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFacebook,
   faInstagram,
-  faTwitter,
+  faXTwitter,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+
+const menuItems = [
+  { label: "About", href: "#about" },
+  { label: "Blog", href: "#blog" },
+  { label: "Team", href: "#team" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Contact", href: "#contact" },
+  { label: "Terms", href: "#terms" },
+];
 
 export default function Footer() {
   return (
     <section className="bg-white">
       <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
         <nav className="flex flex-wrap justify-center -mx-5 -my-2">
-          {["About", "Blog", "Team", "Pricing", "Contact", "Terms"].map(
-            (item) => (
-              <div key={item} className="px-5 py-2">
-                <a
-                  href="#"
-                  className="text-base leading-6 text-gray-500 hover:text-gray-900"
-                >
-                  {item}
-                </a>
-              </div>
-            )
-          )}
+          {menuItems.map((item) => (
+            <div key={item.label} className="px-5 py-2">
+              <a
+                href={item.href}
+                className="text-base leading-6 text-gray-500 hover:text-gray-900"
+              >
+                {item.label}
+              </a>
+            </div>
+          ))}
         </nav>
 
         <div className="flex justify-center mt-8 space-x-6">
           {[
-            { label: "Facebook", icon: faFacebook },
             { label: "Instagram", icon: faInstagram },
-            { label: "Twitter", icon: faTwitter },
-            { label: "GitHub", icon: faGithub },
-          ].map(({ label, icon }) => (
+            { label: "X-Twitter", icon: faXTwitter, href: "https://x.com/DeepidiaAi" },
+            { label: "GitHub", icon: faGithub, href:"https://github.com/Deepidia" },
+          ].map(({ label, icon, href }) => (
             <a
               key={label}
-              href="#"
+              href={href}
+               target="_blank"
               className="text-gray-400 hover:text-gray-500"
               aria-label={label}
             >
