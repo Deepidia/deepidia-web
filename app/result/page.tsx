@@ -18,7 +18,7 @@ export default function GeneratorPage() {
 
         <button
           type="button"
-          className="mt-8 w-56 bg-[#1D1D1D] text-[#00EFD0] font-semibold py-2 rounded-xl border-2 border-[#00EFD0] hover:bg-[#00EFD0] hover:text-[#1D1D1D] transition-all duration-300"
+          className="mt-8 w-56 bg-[#1D1D1D] text-[#00EFD0] font-semibold py-2 rounded-xl border-2 border-[#00EFD0] hover:bg-[#00EFD0] hover:text-[#1D1D1D] transition-all duration-300 cursor-pointer"
         >
           Generate New Idea
         </button>

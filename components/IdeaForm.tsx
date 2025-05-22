@@ -41,7 +41,7 @@ export default function IdeaGenerator() {
       <h1 className="text-4xl font-bold mb-2 text-center text-black">
         Content Idea Generator
       </h1>
-      <p className="text-gray-600 mb-8 text-center">
+      <p className="text-gray-800 mb-8 text-center text-xl">
         Generate endless content ideas with ease using our innovative content
         idea generator.
       </p>
@@ -50,13 +50,13 @@ export default function IdeaGenerator() {
         onSubmit={handleSubmit}
         className="bg-white w-full max-w-2xl p-6 rounded-xl border shadow"
       >
-        <label className="block mb-2 font-semibold text-black">NICHE</label>
+        <label className="block mb-2 font-semibold text-black">Niche</label>
         <input
           type="text"
           placeholder="Search here"
           value={niche}
           onChange={(e) => setNiche(e.target.value)}
-          className="w-full border px-4 py-2 rounded mb-4 text-[#AFAFAF]"
+          className="w-full border px-4 py-2 rounded mb-4 text-black"
         />
 
         <label className="block mb-2 font-semibold text-black">Type of Niche</label>
@@ -73,10 +73,10 @@ export default function IdeaGenerator() {
               onClick={() => setType(t)}
               className={`px-4 py-2 rounded-full border cursor-pointer text-sm whitespace-nowrap transition-all duration-200 ${
                 type === t
-                  ? "bg-[#2AFFE3] text-black"
-                  : "bg-gray-100 text-gray-600"
+                  ? "bg-black text-white"
+                  : "bg-gray-100 text-black"
               }`}
-            >
+            > 
               {t}
             </button>
           ))}
@@ -86,7 +86,7 @@ export default function IdeaGenerator() {
         <select
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
-          className="w-full border px-4 py-2 rounded mb-4 text-[#AFAFAF]"
+          className="w-full border px-4 py-2 rounded mb-4 text-black"
         >
           <option value="">Choose a field topics</option>
           <option value="marketing">Marketing</option>
@@ -103,7 +103,7 @@ export default function IdeaGenerator() {
           placeholder="Enter specific keyword"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
-          className="w-full border px-4 py-2 rounded mb-6 text-[#AFAFAF]"
+          className="w-full border px-4 py-2 rounded mb-6 text-black"
         />
 
           <div className='flex justify-center'>

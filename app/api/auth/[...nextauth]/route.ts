@@ -41,7 +41,7 @@ const authOptions: NextAuthOptions = {
                 email: { label: "Email", type: "email" },
                 password: { label: "Password", type: "password" },
             },
-            async authorize(credentials) {
+            async authorize(credentials: any): Promise<any> {
                 if (!credentials?.email || !credentials?.password) {
                     throw new Error("Missing credentials");
                 }
@@ -64,12 +64,12 @@ const authOptions: NextAuthOptions = {
                 }
 
                 return {
-                    id: user.id,
+                    id: user.id.toString(),
                     email: user.email,
                     name:
                         user.name ||
                         `${user.firstName} ${user.lastName}`.trim(),
-                    image: user.avatar,
+                    image: user.avatar || null,
                 };
             },
         }),
