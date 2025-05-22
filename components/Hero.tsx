@@ -5,8 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useSession } from "next-auth/react";
 
 export default function Hero() {
+  const { data: session } = useSession();
+
   useEffect(() => {
     AOS.init({
       duration: 1000, // durasi animasi 1 detik
@@ -56,12 +59,19 @@ export default function Hero() {
           className="flex flex-col sm:flex-row justify-center items-center gap-4"
           data-aos="fade-up"
           data-aos-delay="600"
-        >
+        // check session
+        > {session ? (
           <Link href="/generator">
             <button className="bg-[#1D1D1D] text-[#00EFD0] font-bold text-base sm:text-lg px-6 py-2 rounded-xl border-2 border-[#00EFD0] shadow-md hover:bg-[#00EFD0] hover:text-[#1D1D1D] hover:shadow-lg transition-all duration-300 ease-in-out">
-              Try for free
+              Lets try!
             </button>
-          </Link>
+          </Link>) : (
+                    <Link href="/generator">
+                    <button className="bg-[#1D1D1D] text-[#00EFD0] font-bold text-base sm:text-lg px-6 py-2 rounded-xl border-2 border-[#00EFD0] shadow-md hover:bg-[#00EFD0] hover:text-[#1D1D1D] hover:shadow-lg transition-all duration-300 ease-in-out">
+                      Try for free
+                    </button>
+                  </Link>
+          )}
           <button className="text-[#1D1D1D] font-medium sm:font-semibold hover:underline transition duration-200">
             Watch Demo
           </button>

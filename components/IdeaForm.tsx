@@ -1,8 +1,14 @@
 "use client";
 
+import { redirect } from 'next/dist/server/api-utils';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';  
+import { useSession } from 'next-auth/react';
+
 
 export default function IdeaGenerator() {
+  const router = useRouter();
+  
   const [niche, setNiche] = useState("");
   const [type, setType] = useState("All Topics");
   const [topic, setTopic] = useState("");
@@ -10,9 +16,24 @@ export default function IdeaGenerator() {
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    alert(
-      `Niche: ${niche}\nType: ${type}\nTopic: ${topic}\nKeyword: ${keyword}`
-    );
+
+    // Store all values in one object
+    const formData = {
+      niche: niche,
+      type: type,
+      topic: topic,
+      keyword: keyword
+    }
+
+    // Debugging log
+    console.log("Form Data:", formData);
+
+    // TODO: Send form data to the server
+    // For now, just log the data
+    console.log("Sending form data to server...");
+    console.log(formData);
+    
+    router.push("/result");
   };
 
   return (

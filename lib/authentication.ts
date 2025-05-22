@@ -15,12 +15,15 @@
             throw new Error("User already exists");
         }
 
+        const fullName = `${firstName} ${lastName}`;
+
         const passwordHash = await bcrypt.hash(password, 10);
 
         const user = await prisma.user.create({
             data: {
                 firstName,
                 lastName,
+                name: fullName,
                 email,
                 password: passwordHash,
             },
@@ -32,6 +35,7 @@
                 id: user.id,
                 firstName: user.firstName,
                 lastName: user.lastName,
+                name: user.name,
                 email: user.email,
             },
         };
@@ -58,6 +62,7 @@
                 id: user.id,
                 firstName: user.firstName,
                 lastName: user.lastName,
+                name: user.name,
                 email: user.email,
             },
         };

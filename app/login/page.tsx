@@ -54,28 +54,20 @@ export default function LoginPage() {
       return;
     }
 
-    try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify(form),
-        headers: { "Content-Type": "application/json" },
-      });
+    // Use NextAuth's signIn for credentials
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: form.email,
+      password: form.password,
+    });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setMessage(data.error || "Login failed");
-        return;
-      }
-
-      setMessage("Login successful!");
-
-      localStorage.setItem("user", JSON.stringify(data.user));
-      router.push("/");
-    } catch (error) {
-      console.error("Login error:", error);
-      setMessage("Something went wrong");
+    if (res?.error) {
+      setMessage(res.error);
+      return;
     }
+
+    setMessage("Login successful!");
+    router.push("/homepage"); // or wherever you want to redirect
   };
 
   const togglePasswordVisibility = () => {
