@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import React, { FormEvent } from "react";
 
 export default function IdeaGenerator() {
   const router = useRouter();
@@ -13,7 +14,7 @@ export default function IdeaGenerator() {
   const [numIdeas, setNumIdeas] = useState(5);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
@@ -22,7 +23,7 @@ export default function IdeaGenerator() {
       category: niche || topic || "General",
       scope: type,
       keyword: keyword,
-      num_ideas: parseInt(numIdeas),
+      num_ideas: numIdeas,
     };
 
     try {
@@ -111,7 +112,8 @@ export default function IdeaGenerator() {
           value={numIdeas}
           min={1}
           max={10}
-          onChange={(e) => setNumIdeas(e.target.value)}
+         onChange={(e) => setNumIdeas(parseInt(e.target.value))}
+
           className="w-full border px-4 py-2 rounded mb-6 text-black"
         />
 

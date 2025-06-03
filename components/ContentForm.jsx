@@ -23,7 +23,7 @@ export default function IdeaGenerator() {
       scope: type,
       keyword: keyword,
       num_ideas: parseInt(numIdeas),
-       username: username,
+      username: username,
     };
 
     try {

@@ -2,8 +2,13 @@
 
 import { useEffect, useState } from "react";
 
+interface Idea {
+  title: string;
+  description: string;
+}
+
 export default function IdeaResult() {
-  const [ideas, setIdeas] = useState([]);
+  const [ideas, setIdeas] = useState<Idea[]>([]);
   const [category, setCategory] = useState("");
   const [scope, setScope] = useState("");
 

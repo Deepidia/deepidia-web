@@ -117,6 +117,7 @@ const authOptions: NextAuthOptions = {
             if (account && profile) {
                 token.id = user.id;
                 token.name = profile.name || user.name || null;
+                //  token.name = user.name || null;
                 token.email = profile.email || user.email;
                 token.picture = profile.image || user.image || undefined;
             }

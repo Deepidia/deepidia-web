@@ -192,7 +192,7 @@ export default function RegisterPage() {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="w-40 py-2 px-4 mt-4 bg-[#1D1D1D] text-[#00EFD0] font-bold rounded-xl border-2 border-[#00EFD0] shadow-md hover:bg-[#00EFD0] hover:text-[#1D1D1D] hover:shadow-lg transition-all duration-300 ease-in-out"
+                className="w-40 py-2 px-4 mt-4 bg-[#1D1D1D] text-[#00EFD0] font-bold rounded-xl border-2 border-[#00EFD0] shadow-md hover:bg-[#00EFD0] hover:text-[#1D1D1D] hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer"
               >
                 Sign up
               </button>
