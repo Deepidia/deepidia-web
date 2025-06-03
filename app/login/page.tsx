@@ -67,7 +67,7 @@ export default function LoginPage() {
     }
 
     setMessage("Login successful!");
-    router.push("/homepage"); // or wherever you want to redirect
+    router.push("/"); // or wherever you want to redirect
   };
 
   const togglePasswordVisibility = () => {
@@ -153,7 +153,7 @@ export default function LoginPage() {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 bg-[#1D1D1D] text-[#00EFD0] font-bold rounded-xl border-2 border-[#00EFD0] shadow-md hover:bg-[#00EFD0] hover:text-[#1D1D1D] hover:shadow-lg transition-all duration-300 ease-in-out"
+                className="w-full flex justify-center py-2 px-4 bg-[#1D1D1D] text-[#00EFD0] font-bold rounded-xl border-2 border-[#00EFD0] shadow-md hover:bg-[#00EFD0] hover:text-[#1D1D1D] hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer"
               >
                 Sign in
               </button>

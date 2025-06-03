@@ -66,7 +66,7 @@ export default function Hero() {
               Lets try!
             </button>
           </Link>) : (
-                    <Link href="/generator">
+                    <Link href="/idea/generate">
                     <button className="bg-[#1D1D1D] text-[#00EFD0] font-bold sm:text-2xl px-6 py-2 rounded-xl border-2 border-[#00EFD0] shadow-md hover:bg-[#00EFD0] hover:text-[#1D1D1D] hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer">
                       Try for free
                     </button>
