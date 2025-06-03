@@ -107,7 +107,7 @@ export default function LoginPage() {
                 onChange={handleChange}
                 placeholder="Enter your email"
                 value={form.email}
-                className={`mt-1 block w-full text-[#AFAFAF]  rounded-md border px-3 py-2 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                className={`mt-1 block w-full text-black  rounded-md border px-3 py-2 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
                   errors.email ? "border-red-500" : "border-gray-300"
                 }`}
               />
@@ -130,7 +130,7 @@ export default function LoginPage() {
                   onChange={handleChange}
                   placeholder="Enter your password"
                   value={form.password}
-                  className={`mt-1 block w-full text-[#AFAFAF]  rounded-md border px-3 py-2 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                  className={`mt-1 block w-full text-black rounded-md border px-3 py-2 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
                     errors.password ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -141,7 +141,7 @@ export default function LoginPage() {
                 >
                   <FontAwesomeIcon
                     icon={showPassword ? faEyeSlash : faEye}
-                    className="h-5 w-5 flex mx-3 text-[#AFAFAF] "
+                    className="h-5 w-5 flex mx-3 text-[#AFAFAF] cursor-pointer"
                   />
                 </button>
               </div>

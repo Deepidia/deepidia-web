@@ -119,7 +119,7 @@ export default function RegisterPage() {
                   value={form.firstName}
                   onChange={handleChange}
                   placeholder="Enter your name"
-                  className="mt-1 block w-full text-sm rounded-md border text-[#AFAFAF] border-gray-300 py-2 px-3 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full text-sm rounded-md border text-black border-gray-300 py-2 px-3 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
                 {errors.firstName && (
                   <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>
@@ -135,7 +135,7 @@ export default function RegisterPage() {
                   value={form.lastName}
                   onChange={handleChange}
                   placeholder="Enter your last name"
-                  className="mt-1 block w-full text-sm rounded-md border text-[#AFAFAF] border-gray-300 py-2 px-3 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full text-sm rounded-md border text-black border-gray-300 py-2 px-3 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
                 {errors.lastName && (
                   <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>
@@ -153,7 +153,7 @@ export default function RegisterPage() {
                 value={form.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                className="mt-1 block w-full text-sm rounded-md border text-[#AFAFAF] border-gray-300 py-2 px-3 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full text-sm rounded-md border text-black border-gray-300 py-2 px-3 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
               {errors.email && (
                 <p className="mt-1 text-sm text-red-600">{errors.email}</p>
@@ -171,7 +171,7 @@ export default function RegisterPage() {
                   value={form.password}
                   onChange={handleChange}
                   placeholder="Enter your password"
-                  className="mt-1 block w-full rounded-md text-sm border text-[#AFAFAF] border-gray-300 py-2 px-3 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full rounded-md text-sm border text-black border-gray-300 py-2 px-3 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
                 <button
                   type="button"
@@ -180,7 +180,7 @@ export default function RegisterPage() {
                 >
                   <FontAwesomeIcon
                     icon={showPassword ? faEyeSlash : faEye}
-                    className="h-5 w-5 flex mx-3"
+                    className="h-5 w-5 flex mx-3 cursor-pointer"
                   />
                 </button>
               </div>
