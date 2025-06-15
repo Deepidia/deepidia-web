@@ -28,7 +28,7 @@ export default function IdeaGenerator() {
 
     try {
       const response = await fetch(
-        "http://8.219.101.54:8000/api/v1/content_creation",
+        "http://api.deepidia.com/api/v1/content_creation",
         {
           method: "POST",
           headers: {
