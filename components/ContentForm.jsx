@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function IdeaGenerator() {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const [niche, setNiche] = useState("");
   const [type, setType] = useState("All Topics");
@@ -12,23 +14,40 @@ export default function IdeaGenerator() {
   const [keyword, setKeyword] = useState("");
   const [numIdeas, setNumIdeas] = useState(5);
   const [loading, setLoading] = useState(false);
+  const [loadingStep, setLoadingStep] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!session?.user) {
+      router.push('/auth/signin');
+      return;
+    }
+
     setLoading(true);
+    setError(null);
+    setLoadingStep("Preparing your content request...");
 
     const payload = {
       model_type: "openai",
       category: niche || topic || "General",
       scope: type,
-      keyword: keyword,
+      keyword: keyword || "string",
       num_ideas: parseInt(numIdeas),
-      username: username,
+      username: session.user.name || session.user.email
     };
 
     try {
+      setLoadingStep("Connecting to AI service...");
+      const apiUrl = process.env.NEXT_PUBLIC_AI_FASTAPI;
+      if (!apiUrl) {
+        throw new Error('API URL is not configured');
+      }
+
+      setLoadingStep("Generating creative content ideas...");
       const response = await fetch(
-        "http://api.deepidia.com/api/v1/content_creation",
+        `${apiUrl}/api/v1/content_creation`,
         {
           method: "POST",
           headers: {
@@ -38,17 +57,30 @@ export default function IdeaGenerator() {
         }
       );
 
-      const data = await response.json();
-      // console.log("Generated ideas:", data);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-      // Simpan ke localStorage / state global atau redirect ke halaman hasil
+      setLoadingStep("Processing and organizing your content...");
+      const data = await response.json();
       localStorage.setItem("generated_content", JSON.stringify(data));
 
+      setLoadingStep("Almost done! Redirecting to results...");
       router.push("/content/results");
-    } catch (error) {
-      console.error("Failed to generate ideas:", error);
+    } catch (err) {
+      console.error("Failed to generate ideas:", err);
+      setError(err.message || "Something went wrong. Please try again.");
+      setLoadingStep("Oops! Something went wrong. Please try again.");
+      setTimeout(() => {
+        setLoading(false);
+        setLoadingStep("");
+        setError(null);
+      }, 3000);
     } finally {
-      setLoading(false);
+      if (!error) {
+        setLoading(false);
+        setLoadingStep("");
+      }
     }
   };
 
@@ -62,9 +94,34 @@ export default function IdeaGenerator() {
         idea generator.
       </p>
 
+      {error && (
+        <div className="fixed inset-0 backdrop-blur-md bg-white/30 flex items-center justify-center z-50">
+          <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-2xl max-w-md w-full mx-4 text-center border border-red-100">
+            <div className="text-red-500 text-4xl mb-4">⚠️</div>
+            <h3 className="text-xl font-semibold mb-2 text-red-600">Error</h3>
+            <p className="text-gray-600 mb-4">{error}</p>
+          </div>
+        </div>
+      )}
+
+      {loading && (
+        <div className="fixed inset-0 backdrop-blur-md bg-white/30 flex items-center justify-center z-50">
+          <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-2xl max-w-md w-full mx-4 text-center border border-gray-100">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#00EFD0] mx-auto mb-4"></div>
+            <h3 className="text-xl font-semibold mb-2 text-black">Generating Your Content</h3>
+            <p className="text-gray-600 mb-4">{loadingStep}</p>
+            <div className="flex justify-center space-x-2">
+              <div className="w-3 h-3 bg-[#00EFD0] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+              <div className="w-3 h-3 bg-[#00EFD0] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+              <div className="w-3 h-3 bg-[#00EFD0] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <form
         onSubmit={handleSubmit}
-        className="bg-white w-full max-w-2xl p-6 rounded-xl border shadow"
+        className="bg-white w-full max-w-2xl p-6 rounded-xl border shadow relative"
       >
         <label className="block mb-2 font-semibold text-black">Niche</label>
         <input
@@ -117,9 +174,13 @@ export default function IdeaGenerator() {
           <button
             type="submit"
             disabled={loading}
-            className="w-40 bg-[#1D1D1D] text-[#00EFD0] font-bold text-lg px-7 py-2 rounded-xl border-2 border-[#00EFD0] shadow-md hover:bg-[#00EFD0] hover:text-[#1D1D1D] hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer"
+            className={`w-40 font-bold text-lg px-7 py-2 rounded-xl border-2 border-[#00EFD0] shadow-md transition-all duration-300 ease-in-out ${
+              loading 
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                : 'bg-[#1D1D1D] text-[#00EFD0] hover:bg-[#00EFD0] hover:text-[#1D1D1D] hover:shadow-lg cursor-pointer'
+            }`}
           >
-            {loading ? "Loading..." : "Go!"}
+            {loading ? "Processing..." : "Generate"}
           </button>
         </div>
       </form>
