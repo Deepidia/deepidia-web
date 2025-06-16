@@ -27,7 +27,7 @@ export default function IdeaGenerator() {
     };
 
     try {
-      const response = await fetch("http://api.deepidia.com/api/v1/generate_viral_ideas", {
+      const response = await fetch("https://api.deepidia.com/api/v1/generate_viral_ideas", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
