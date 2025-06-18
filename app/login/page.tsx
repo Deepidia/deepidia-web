@@ -14,12 +14,12 @@ export default function LoginPage() {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {}
   );
+  // State `message` ini akan kita gunakan untuk menampung error dari server
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const validate = () => {
     const errs: { email?: string; password?: string } = {};
-    // Email regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!form.email) {
@@ -35,15 +35,16 @@ export default function LoginPage() {
     }
 
     setErrors(errs);
-
-    // Return true jika tidak ada error
     return Object.keys(errs).length === 0;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setErrors((prev) => ({ ...prev, [e.target.name]: "" })); // reset error saat input berubah
-    setMessage("");
+    setErrors((prev) => ({ ...prev, [e.target.name]: "" }));
+    // Jika pengguna mulai mengetik lagi, hilangkan pesan error server
+    if (message) {
+      setMessage("");
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -54,7 +55,6 @@ export default function LoginPage() {
       return;
     }
 
-    // Use NextAuth's signIn for credentials
     const res = await signIn("credentials", {
       redirect: false,
       email: form.email,
@@ -62,12 +62,13 @@ export default function LoginPage() {
     });
 
     if (res?.error) {
+      // Simpan pesan error dari server (route.ts) ke state `message`
       setMessage(res.error);
       return;
     }
-
-    setMessage("Login successful!");
-    router.push("/"); // or wherever you want to redirect
+    
+    // Redirect jika berhasil
+    router.push("/");
   };
 
   const togglePasswordVisibility = () => {
@@ -94,6 +95,22 @@ export default function LoginPage() {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-6 shadow-md border border-gray-300 rounded-lg sm:px-10">
           <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+
+            {/* --- KOMPONEN ALERT DITAMPILKAN DI SINI --- */}
+            {message && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative flex items-center justify-between" role="alert">
+                <span className="block sm:inline">{message}</span>
+                <button
+                  type="button"
+                  onClick={() => setMessage("")} // Tombol untuk menutup alert
+                  className="ml-4 -mr-1 p-1"
+                  aria-label="Close"
+                >
+                  <span className="text-xl font-bold" aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            )}
+
             <div>
               <label
                 htmlFor="email"
@@ -107,7 +124,7 @@ export default function LoginPage() {
                 onChange={handleChange}
                 placeholder="Enter your email"
                 value={form.email}
-                className={`mt-1 block w-full text-black  rounded-md border px-3 py-2 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                className={`mt-1 block w-full text-black rounded-md border px-3 py-2 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
                   errors.email ? "border-red-500" : "border-gray-300"
                 }`}
               />
@@ -160,6 +177,7 @@ export default function LoginPage() {
             </div>
           </form>
 
+          {/* ... sisa kode ... */}
           <div className="relative my-4">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300" />
@@ -199,9 +217,11 @@ export default function LoginPage() {
             </Link>
           </p>
 
-          {message && (
+          {/* Tampilan pesan error lama di bawah ini kita hapus agar tidak duplikat */}
+          {/* {message && (
             <p className="mt-4 text-center text-sm text-red-600">{message}</p>
-          )}
+          )} 
+          */}
         </div>
       </div>
     </div>
