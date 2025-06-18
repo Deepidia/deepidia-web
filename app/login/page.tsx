@@ -14,7 +14,6 @@ export default function LoginPage() {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {}
   );
-  // State `message` ini akan kita gunakan untuk menampung error dari server
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -41,7 +40,6 @@ export default function LoginPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setErrors((prev) => ({ ...prev, [e.target.name]: "" }));
-    // Jika pengguna mulai mengetik lagi, hilangkan pesan error server
     if (message) {
       setMessage("");
     }
@@ -62,7 +60,6 @@ export default function LoginPage() {
     });
 
     if (res?.error) {
-      // Simpan pesan error dari server (route.ts) ke state `message`
       setMessage(res.error);
       return;
     }
@@ -96,13 +93,13 @@ export default function LoginPage() {
         <div className="bg-white py-8 px-6 shadow-md border border-gray-300 rounded-lg sm:px-10">
           <form onSubmit={handleSubmit} className="space-y-6" noValidate>
 
-            {/* --- KOMPONEN ALERT DITAMPILKAN DI SINI --- */}
+            {/* --- ALERT --- */}
             {message && (
-              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative flex items-center justify-between" role="alert">
+              <div className="bg-red-100 border border-red-400 text-red-700 px-3 py-2 rounded relative flex items-center justify-between" role="alert">
                 <span className="block sm:inline">{message}</span>
                 <button
                   type="button"
-                  onClick={() => setMessage("")} // Tombol untuk menutup alert
+                  onClick={() => setMessage("")} 
                   className="ml-4 -mr-1 p-1"
                   aria-label="Close"
                 >
@@ -177,7 +174,6 @@ export default function LoginPage() {
             </div>
           </form>
 
-          {/* ... sisa kode ... */}
           <div className="relative my-4">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300" />
@@ -216,12 +212,6 @@ export default function LoginPage() {
               Sign up
             </Link>
           </p>
-
-          {/* Tampilan pesan error lama di bawah ini kita hapus agar tidak duplikat */}
-          {/* {message && (
-            <p className="mt-4 text-center text-sm text-red-600">{message}</p>
-          )} 
-          */}
         </div>
       </div>
     </div>

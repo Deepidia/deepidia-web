@@ -111,9 +111,11 @@ export default function Hero() {
                 Instantly generate ideas to overcome creative blocks or quickly
                 kickstart new projects.
               </p>
-              <button className="border border-black px-4 py-1 rounded text-black hover:bg-black hover:text-white transition cursor-pointer">
-                Get Demo
-              </button>
+              <Link href="/idea/generate">
+                <button className="border border-black px-4 py-1 rounded text-black hover:bg-black hover:text-white transition cursor-pointer">
+                  Get Demo
+                </button>
+              </Link>
             </div>
 
             {/* Card 2 */}
@@ -128,9 +130,11 @@ export default function Hero() {
                 Directly connects generated ideas to spreadsheets for
                 streamlined content management.
               </p>
-              <button className="border border-black px-4 py-1 rounded text-black hover:bg-black hover:text-white transition cursor-pointer">
-                Get Demo
-              </button>
+              <Link href="/content/generate">
+                <button className="border border-black px-4 py-1 rounded text-black hover:bg-black hover:text-white transition cursor-pointer">
+                  Get Demo
+                </button>
+              </Link>
             </div>
 
             {/* Card 3 */}
@@ -145,9 +149,12 @@ export default function Hero() {
                 Seamlessly connect and publish your ideas directly to Medium or
                 other markdown-supported blog platforms.
               </p>
-              <button className="border border-black px-4 py-1 rounded text-black hover:bg-black hover:text-white transition cursor-pointer">
+              <Link
+                href="/coming-soon"
+                className="inline-block border border-black px-4 py-1 rounded text-black hover:bg-black hover:text-white transition cursor-pointer"
+              >
                 Get Demo
-              </button>
+              </Link>
             </div>
           </div>
         </div>
