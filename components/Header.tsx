@@ -170,7 +170,7 @@ export default function Header() {
                 setIsOpen(false);
                 setModalIsOpen(true);
               }}
-              className="flex items-center gap-2 text-red-600 hover:text-red-800 transition font-bold text-lg"
+              className="flex items-center gap-2 text-[#1D1D1D] font-bold border border-[#1D1D1D] rounded-xl hover:bg-[#1D1D1D] hover:text-white transition-all duration-300 cursor-pointer"
             >
               <FontAwesomeIcon icon={faRightFromBracket} />
               Logout
