@@ -37,7 +37,7 @@ export default function IdeaResult() {
                   <strong className="block text-xs text-gray-600 mb-1">
                     Topic Field
                   </strong>
-                  <span>{category}</span>
+                  <span className="inline-block bg-[#E0F7FA] text-[#00BFA6] font-semibold px-3 py-1 rounded-full text-xs mt-1">{category}</span>
                 </div>
 
                 {username && (
@@ -49,29 +49,26 @@ export default function IdeaResult() {
                   </div>
                 )}
 
-                <span className="px-4 py-1 text-black text-sm font-semibold rounded-full border border-gray-300 mt-2 md:mt-0">
-                  {scope}
-                </span>
+                <span className="inline-block bg-[#1D1D1D] text-[#00EFD0] text-xs font-bold px-3 py-1 rounded-full mt-2 md:mt-0">{scope}</span>
               </div>
             </div>
           ))}
 
           {/* Bagian tautan hasil Spreadsheet */}
           {spreadsheetUrl && (
-            <div className="mt-10 p-6 bg-gray-100 rounded-xl shadow">
-              <h4 className="font-semibold text-lg mb-4">Output Links</h4>
-
-              <p>
-                📄 Spreadsheet:{" "}
-                <a
-                  href={spreadsheetUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 underline break-all"
-                >
-                  {spreadsheetUrl}
-                </a>
-              </p>
+            <div className="mt-10 p-6 bg-gradient-to-r from-[#e0f7fa] to-[#f1f8e9] rounded-2xl shadow-lg border border-[#00BFA6]/30 flex flex-col items-center">
+              <div className="flex items-center gap-2 mb-2">
+                <svg className="w-6 h-6 text-[#00BFA6]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 17v-2a2 2 0 012-2h2a2 2 0 012 2v2m-6 4h6a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                <h4 className="font-bold text-lg text-[#00BFA6]">Spreadsheet Output</h4>
+              </div>
+              <a
+                href={spreadsheetUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline break-all text-base font-semibold hover:text-blue-800 transition"
+              >
+                {spreadsheetUrl}
+              </a>
             </div>
           )}
         </div>

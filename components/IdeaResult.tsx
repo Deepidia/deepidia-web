@@ -36,16 +36,38 @@ export default function IdeaResult() {
               <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between mt-4 text-sm text-gray-900">
                 {/* Kiri: Topic Field */}
                 <div>
-                  <strong className="block text-xs text-gray-600 mb-1">
-                    Topic Field
-                  </strong>
-                  <span>{category}</span>
+                  <span className="inline-block bg-[#E0F7FA] text-[#00BFA6] font-semibold px-3 py-1 rounded-full text-xs mt-1">
+                    {category}
+                  </span>
                 </div>
 
                 {/* Kanan: Scope Badge */}
-                <span className=" px-4 py-1 text-black text-sm font-semibold rounded-full border border-gray-300 mt-2 md:mt-0">
-                  {scope}
-                </span>
+                {scope === 'Future Oriented' && (
+                  <span className="px-4 py-1 text-white text-sm font-semibold rounded-full bg-gradient-to-r from-[#00BFA6] to-[#00EFD0] shadow-md mt-2 md:mt-0 flex items-center gap-1">
+                    <svg className="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    {scope}
+                  </span>
+                )}
+                {scope === 'Trending Now' && (
+                  <span className="px-4 py-1 text-white text-sm font-semibold rounded-full bg-gradient-to-r from-[#FF6B6B] to-[#FF8E8E] shadow-md mt-2 md:mt-0">
+                    {scope}
+                  </span>
+                )}
+                {scope === 'Most Researched' && (
+                  <span className="px-4 py-1 text-white text-sm font-semibold rounded-full bg-gradient-to-r from-[#4ECDC4] to-[#6EE7DF] shadow-md mt-2 md:mt-0">
+                    {scope}
+                  </span>
+                )}
+                {scope === 'All Topics' && (
+                  <span className="px-4 py-1 text-black text-sm font-semibold rounded-full bg-gradient-to-r from-[#A8E6CF] to-[#C8F7C5] shadow-md mt-2 md:mt-0">
+                    {scope}
+                  </span>
+                )}
+                {!['Future Oriented', 'Trending Now', 'Most Researched', 'All Topics'].includes(scope) && (
+                  <span className="px-4 py-1 text-black text-sm font-semibold rounded-full border border-gray-300 mt-2 md:mt-0">
+                    {scope}
+                  </span>
+                )}
               </div>
             </div>
           ))}

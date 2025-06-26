@@ -48,17 +48,17 @@ export default function Header() {
           <Image src="/Logo.png" alt="Logo DeepIdia" width={40} height={30} />
         </Link>
         <nav className="flex items-center space-x-8 text-[#1D1D1D] font-bold ml-8">
-          <Link href="#about" className="hover:text-[#00BFA6] transition text-lg">
+          <Link href="/#about" className="hover:text-[#00BFA6] transition text-lg">
             About
           </Link>
           <Link
-            href="#solutions"
+            href="/#solutions"
             className="hover:text-[#00BFA6] transition text-lg"
           >
             Solutions
           </Link>
           <Link
-            href="#pricing"
+            href="/#pricing"
             className="hover:text-[#00BFA6] transition text-lg"
           >
             Pricing
@@ -142,21 +142,21 @@ export default function Header() {
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 py-4 md:hidden">
           <Link
-            href="#about"
+            href="/#about"
             className="hover:text-[#00BFA6] transition text-lg"
             onClick={() => setIsOpen(false)}
           >
             About
           </Link>
           <Link
-            href="#solutions"
+            href="/#solutions"
             className="hover:text-[#00BFA6] transition text-lg"
             onClick={() => setIsOpen(false)}
           >
             Solutions
           </Link>
           <Link
-            href="#pricing"
+            href="/#pricing"
             className="hover:text-[#00BFA6] transition text-lg"
             onClick={() => setIsOpen(false)}
           >

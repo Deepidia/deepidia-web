@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { FaRobot } from "react-icons/fa";
+import { SiGooglegemini } from "react-icons/si";
 
 export default function IdeaGenerator() {
   const router = useRouter();
@@ -13,6 +15,7 @@ export default function IdeaGenerator() {
   const [topic, setTopic] = useState("");
   const [keyword, setKeyword] = useState("");
   const [numIdeas, setNumIdeas] = useState(5);
+  const [modelType, setModelType] = useState("openai");
   const [loading, setLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState("");
   const [error, setError] = useState(null);
@@ -30,7 +33,7 @@ export default function IdeaGenerator() {
     setLoadingStep("Preparing your content request...");
 
     const payload = {
-      model_type: "openai",
+      model_type: modelType,
       category: niche || topic || "General",
       scope: type,
       keyword: keyword || "string",
@@ -123,6 +126,40 @@ export default function IdeaGenerator() {
         onSubmit={handleSubmit}
         className="bg-white w-full max-w-2xl p-6 rounded-xl border shadow relative"
       >
+        <label className="block mb-2 font-semibold text-black">AI Model</label>
+        <div className="flex gap-4 mb-4">
+          <label
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl border-2 cursor-pointer transition-all duration-200 shadow-sm text-base font-semibold
+              ${modelType === "openai" ? "border-[#00EFD0] bg-[#F0FEFC] text-[#00BFA6]" : "border-gray-200 bg-white text-black hover:border-[#00EFD0]"}`}
+          >
+            <input
+              type="radio"
+              name="modelType"
+              value="openai"
+              checked={modelType === "openai"}
+              onChange={(e) => setModelType(e.target.value)}
+              className="hidden"
+            />
+            <FaRobot className="text-2xl" />
+            OpenAI
+          </label>
+          <label
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl border-2 cursor-pointer transition-all duration-200 shadow-sm text-base font-semibold
+              ${modelType === "gemini" ? "border-[#00EFD0] bg-[#F0FEFC] text-[#00BFA6]" : "border-gray-200 bg-white text-black hover:border-[#00EFD0]"}`}
+          >
+            <input
+              type="radio"
+              name="modelType"
+              value="gemini"
+              checked={modelType === "gemini"}
+              onChange={(e) => setModelType(e.target.value)}
+              className="hidden"
+            />
+            <SiGooglegemini className="text-2xl" />
+            Gemini
+          </label>
+        </div>
+
         <label className="block mb-2 font-semibold text-black">Niche</label>
         <input
           type="text"
@@ -169,6 +206,25 @@ export default function IdeaGenerator() {
           <option value="Lifestyle">Lifestyle</option>
           <option value="Education">Education</option>
         </select>
+
+        <label className="block mb-2 font-semibold text-black">Additional Keywords (Optional)</label>
+        <input
+          type="text"
+          placeholder="Enter specific keyword"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          className="w-full border px-4 py-2 rounded mb-4 text-black"
+        />
+
+        <label className="block mb-2 font-semibold text-black">Number of Ideas</label>
+        <input
+          type="number"
+          value={numIdeas}
+          min={1}
+          max={10}
+          onChange={(e) => setNumIdeas(parseInt(e.target.value))}
+          className="w-full border px-4 py-2 rounded mb-6 text-black"
+        />
 
         <div className="flex justify-center">
           <button

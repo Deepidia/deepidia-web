@@ -58,6 +58,15 @@ export default function IdeaGenerator() {
         Generate endless content ideas with ease using our innovative content idea generator.
       </p>
 
+      {loading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-white/40">
+          <div className="bg-white/90 rounded-xl shadow-lg p-8 flex flex-col items-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#00EFD0] mb-4"></div>
+            <p className="text-lg font-semibold text-black">Generating your ideas...</p>
+          </div>
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="bg-white w-full max-w-2xl p-6 rounded-xl border shadow">
         <label className="block mb-2 font-semibold text-black">Niche</label>
         <input
@@ -123,7 +132,7 @@ export default function IdeaGenerator() {
             disabled={loading}
             className="w-40 bg-[#1D1D1D] text-[#00EFD0] font-bold text-lg px-7 py-2 rounded-xl border-2 border-[#00EFD0] shadow-md hover:bg-[#00EFD0] hover:text-[#1D1D1D] hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer"
           >
-            {loading ? "Loading..." : "Go!"}
+            Go!
           </button>
         </div>
       </form>
