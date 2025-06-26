@@ -6,9 +6,11 @@ import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Hero() {
   const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     AOS.init({
@@ -124,17 +126,23 @@ export default function Hero() {
               data-aos="flip-left"
             >
               <h3 className="text-xl font-semibold mb-2 text-black">
-                Content Creation
+                Supercharge Your Content Creation
               </h3>
               <p className="text-gray-600 mb-4">
-                Directly connects generated ideas to spreadsheets for
-                streamlined content management.
+                Transform your ideas into polished content in seconds. Effortlessly export to <b>Google Sheets</b>  for creators, marketers, and teams who want to move fast.
               </p>
-              <Link href="/content/generate">
-                <button className="border border-black px-4 py-1 rounded text-black hover:bg-black hover:text-white transition cursor-pointer">
-                  Get Demo
-                </button>
-              </Link>
+              <button
+                className="border border-black px-4 py-1 rounded text-black hover:bg-black hover:text-white transition cursor-pointer"
+                onClick={() => {
+                  if (!session) {
+                    router.push('/login');
+                  } else {
+                    router.push('/content/generate');
+                  }
+                }}
+              >
+                Start Creating Instantly
+              </button>
             </div>
 
             {/* Card 3 */}
@@ -143,18 +151,23 @@ export default function Hero() {
               data-aos="flip-left"
             >
               <h3 className="text-xl font-semibold mb-2 text-black">
-                Blog Post
+                One-Click Blog Publishing
               </h3>
               <p className="text-gray-600 mb-4">
-                Seamlessly connect and publish your ideas directly to Medium or
-                other markdown-supported blog platforms.
+                Publish your AI-generated content directly to Medium and top blogging platforms. Save time, boost your reach, and grow your audience with a single click.
               </p>
-              <Link
-                href="/coming-soon"
+              <button
                 className="inline-block border border-black px-4 py-1 rounded text-black hover:bg-black hover:text-white transition cursor-pointer"
+                onClick={() => {
+                  if (!session) {
+                    router.push('/login');
+                  } else {
+                    router.push('/coming-soon');
+                  }
+                }}
               >
-                Get Demo
-              </Link>
+                Publish Effortlessly
+              </button>
             </div>
           </div>
         </div>
