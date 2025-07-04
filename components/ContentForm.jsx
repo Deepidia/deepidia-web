@@ -34,11 +34,12 @@ export default function IdeaGenerator() {
 
     const payload = {
       model_type: modelType,
-      category: niche || topic || "General",
+      category: topic || "General",
       scope: type,
       keyword: keyword || "string",
       num_ideas: parseInt(numIdeas),
-      username: session.user.name || session.user.email
+      name: session.user.name,
+      export_formats: ["csv"]
     };
 
     try {
@@ -66,6 +67,7 @@ export default function IdeaGenerator() {
 
       setLoadingStep("Processing and organizing your content...");
       const data = await response.json();
+      console.log("API response data:", data);
       localStorage.setItem("generated_content", JSON.stringify(data));
 
       setLoadingStep("Almost done! Redirecting to results...");
@@ -160,17 +162,8 @@ export default function IdeaGenerator() {
           </label>
         </div>
 
-        <label className="block mb-2 font-semibold text-black">Niche</label>
-        <input
-          type="text"
-          placeholder="Search here"
-          value={niche}
-          onChange={(e) => setNiche(e.target.value)}
-          className="w-full border px-4 py-2 rounded mb-4 text-black"
-        />
-
         <label className="block mb-2 font-semibold text-black">
-          Type of Niche
+          Content Type
         </label>
         <div className="flex flex-wrap gap-2 mb-4">
           {[
@@ -193,30 +186,30 @@ export default function IdeaGenerator() {
         </div>
 
         <label className="block mb-2 font-semibold text-black">
-          Select Topics
+          Content Category
         </label>
         <select
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
           className="w-full border px-4 py-2 rounded mb-4 text-black"
         >
-          <option value="">Choose a field topic</option>
+          <option value="">Choose a content category</option>
           <option value="Marketing">Marketing</option>
           <option value="Technology">Technology</option>
           <option value="Lifestyle">Lifestyle</option>
           <option value="Education">Education</option>
         </select>
 
-        <label className="block mb-2 font-semibold text-black">Additional Keywords (Optional)</label>
+        <label className="block mb-2 font-semibold text-black">Specific Keywords (Optional)</label>
         <input
           type="text"
-          placeholder="Enter specific keyword"
+          placeholder="Enter specific keywords for content focus"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           className="w-full border px-4 py-2 rounded mb-4 text-black"
         />
 
-        <label className="block mb-2 font-semibold text-black">Number of Ideas</label>
+        <label className="block mb-2 font-semibold text-black">Number of Content Ideas</label>
         <input
           type="number"
           value={numIdeas}
