@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import React, { FormEvent } from "react";
 
 export default function IdeaGenerator() {
@@ -13,6 +13,7 @@ export default function IdeaGenerator() {
   const [keyword, setKeyword] = useState("");
   const [numIdeas, setNumIdeas] = useState(5);
   const [loading, setLoading] = useState(false);
+  const [loadingStep, setLoadingStep] = useState("");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,10 +28,17 @@ export default function IdeaGenerator() {
     };
 
     try {
-      const response = await fetch("https://api.deepidia.com/api/v1/generate_viral_ideas", {
+      setLoadingStep("Connecting to AI service...");
+      const apiUrl = process.env.NEXT_PUBLIC_AI_FASTAPI;
+      if (!apiUrl) {
+        throw new Error("API URL is not configured");
+      }
+
+      setLoadingStep("Generating creative ideas...");
+      const response = await fetch(`${apiUrl}/api/v1/generate_viral_ideas`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
       });
@@ -55,19 +63,25 @@ export default function IdeaGenerator() {
         Content Idea Generator
       </h1>
       <p className="text-gray-800 mb-8 text-center text-xl">
-        Generate endless content ideas with ease using our innovative content idea generator.
+        Generate endless content ideas with ease using our innovative content
+        idea generator.
       </p>
 
       {loading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-white/40">
           <div className="bg-white/90 rounded-xl shadow-lg p-8 flex flex-col items-center">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#00EFD0] mb-4"></div>
-            <p className="text-lg font-semibold text-black">Generating your ideas...</p>
+            <p className="text-lg font-semibold text-black">
+              Generating your ideas...
+            </p>
           </div>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-white w-full max-w-2xl p-6 rounded-xl border shadow">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white w-full max-w-2xl p-6 rounded-xl border shadow"
+      >
         <label className="block mb-2 font-semibold text-black">Niche</label>
         <input
           type="text"
@@ -77,9 +91,16 @@ export default function IdeaGenerator() {
           className="w-full border px-4 py-2 rounded mb-4 text-black"
         />
 
-        <label className="block mb-2 font-semibold text-black">Type of Niche</label>
+        <label className="block mb-2 font-semibold text-black">
+          Type of Niche
+        </label>
         <div className="flex flex-wrap gap-2 mb-4">
-          {["All Topics", "Trending Now", "Most Researched", "Future Oriented"].map((t) => (
+          {[
+            "All Topics",
+            "Trending Now",
+            "Most Researched",
+            "Future Oriented",
+          ].map((t) => (
             <button
               type="button"
               key={t}
@@ -93,7 +114,9 @@ export default function IdeaGenerator() {
           ))}
         </div>
 
-        <label className="block mb-2 font-semibold text-black">Select Topics</label>
+        <label className="block mb-2 font-semibold text-black">
+          Select Topics
+        </label>
         <select
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
@@ -106,7 +129,9 @@ export default function IdeaGenerator() {
           <option value="Education">Education</option>
         </select>
 
-        <label className="block mb-2 font-semibold text-black">Additional Keywords (Optional)</label>
+        <label className="block mb-2 font-semibold text-black">
+          Additional Keywords (Optional)
+        </label>
         <input
           type="text"
           placeholder="Enter specific keyword"
@@ -115,14 +140,15 @@ export default function IdeaGenerator() {
           className="w-full border px-4 py-2 rounded mb-4 text-black"
         />
 
-        <label className="block mb-2 font-semibold text-black">Number of Ideas</label>
+        <label className="block mb-2 font-semibold text-black">
+          Number of Ideas
+        </label>
         <input
           type="number"
           value={numIdeas}
           min={1}
           max={10}
-         onChange={(e) => setNumIdeas(parseInt(e.target.value))}
-
+          onChange={(e) => setNumIdeas(parseInt(e.target.value))}
           className="w-full border px-4 py-2 rounded mb-6 text-black"
         />
 
